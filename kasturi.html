@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Restaurant Booking</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1470&q=80');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: rgba(0, 0, 0, 0.6);
+      background-blend-mode: darken;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    .menu-items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .item {
+      width: 180px;
+      text-align: center;
+    }
+
+    .item img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .item label {
+      display: block;
+      margin-top: 8px;
+      font-size: 16px;
+    }
+
+    .booking {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .booking input {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .booking button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ff5722;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .booking button:hover {
+      background-color: #e64a19;
+    }
+
+    #confirmation {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #00ffcc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Welcome to Foodie's Hub</h1>
+
+    <section class="menu">
+      <h2>Our Menu</h2>
+      <div class="menu-items">
+        <div class="item">
+          <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=60" alt="Burger">
+          <label><input type="checkbox" name="menu" value="Burger"> Burger</label>
+        </div>
+        <div class="item">
+          <img src="https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=60" alt="Pasta">
+          <label><input type="checkbox" name="menu" value="Pasta"> Pasta</label>
+        </div>
+      </div>
+    </section>
+
+    <section class="booking">
+      <h2>Book a Table</h2>
+      <form id="bookingForm">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="number" id="people" placeholder="Number of People" required>
+        <input type="date" id="date" required>
+        <input type="time" id="time" required>
+        <button type="submit">Book Now</button>
+      </form>
+      <div id="confirmation"></div>
+    </section>
+  </div>
+
+  <script>
+    document.getElementById("bookingForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const people = document.getElementById("people").value;
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+
+      const selectedItems = Array.from(document.querySelectorAll('input[name="menu"]:checked'))
+        .map(item => item.value)
+        .join(", ") || "no items";
+
+      const confirmation = document.getElementById("confirmation");
+      confirmation.innerHTML = `
+        <p>Thank you, <strong>${name}</strong>! Your table for <strong>${people}</strong> on 
+        <strong>${date}</strong> at <strong>${time}</strong> has been booked.</p>
+        <p>You have selected: <strong>${selectedItems}</strong></p>
+      `;
+    });
+  </script>
+
+</body>
+</html>
